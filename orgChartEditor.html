@@ -112,8 +112,8 @@
           myDiagram.startTransaction("add employee");
           var newemp = {
             name: "(new person)",
-            title: "",
-            comments: "",
+            title: "(new title)",
+            comments: "(new comment)",
             parent: thisemp.key
           };
           myDiagram.model.addNodeData(newemp);
@@ -137,8 +137,7 @@
 
       // This converter is used by the Picture.
       function findHeadShot(key) {
-        if (key < 0 || key > 16) return "images/HSnopic.jpg"; // There are only 16 images on the server
-        return "images/HS" + key + ".jpg"
+        return "images/Member-" + key + ".jpg"
       }
 
       // define the Node template
@@ -222,6 +221,9 @@
                   margin: new go.Margin(0, 0, 0, 0)
                 },
                 new go.Binding("text", "title").makeTwoWay()),
+			  $(go.TextBlock, textStyle(),
+                { row: 2, column: 0 },
+                new go.Binding("text", "key", function(v) { return "Image: Member-" + v + ".jpg"; })),	
               $(go.TextBlock, textStyle(),  // the comments
                 {
                   row: 3, column: 0, columnSpan: 5,
@@ -343,6 +345,7 @@
 </head>
 <body onload="init()">
 <div id="sample">
+
   <div id="myDiagramDiv" style="background-color: #34343C; border: solid 1px black; height: 570px;"></div>
   <!--<p><button id="zoomToFit">Zoom to Fit</button> <button id="centerRoot">Center on root</button></p>-->
   
@@ -352,10 +355,30 @@
       <button onclick="load()">Load</button>
       Diagram Model saved in JSON format:
     </div>
-    <textarea id="mySavedModel" style="width:100%; height:270px;">
-{ "class": "TreeModel",
-  "nodeDataArray": [ {"key":1, "name":"Stella Payne Diaz", "title":"CEO"} ]}
-    </textarea>
+    <textarea id="mySavedModel" style="width:100%; height:270px;">{ "class": "TreeModel",
+  "nodeDataArray": [ 
+{"key":1, "name":"Darren Parker", "title":"Managing Director"},
+{"name":"Travis Barnhill", "title":"General Manager", "comments":"\n", "parent":1, "key":2},
+{"name":"Duncan Mullin", "title":"Operations Manager", "comments":"", "parent":2, "key":3},
+{"name":"Tony Gibb", "title":"PM/BA", "comments":"", "parent":2, "key":4},
+{"name":"Christine Walker", "title":"Software & Support Manager", "comments":"", "parent":2, "key":5},
+{"name":"Vineel Dhani", "title":"Reseller Channel Manager", "comments":"", "parent":2, "key":6},
+{"name":"Norman Vaz", "title":"Marketing Manager", "comments":"\n", "parent":2, "key":7},
+{"name":"Helen Mackeson-Smith", "title":"HR Manager", "comments":"", "parent":2, "key":8},
+{"name":"Harshi Manager", "title":"Account Manager", "comments":"", "parent":2, "key":9},
+{"name":"Steve Nemeth", "title":"Corporate Sales Manager", "comments":"\n", "parent":2, "key":10},
+{"name":"Sukhwinder Kaur", "title":"Production Team Lead", "comments":"", "parent":3, "key":11},
+{"name":"Alan Green", "title":"Service Manager", "comments":"", "parent":3, "key":12},
+{"name":"Shani Mudumbai", "title":"Full Stack Developer", "comments":"", "parent":5, "key":13},
+{"name":"Nilesh Raj", "title":"Senior Product Support Manager", "comments":"", "parent":5, "key":16},
+{"name":"Henry Reyes", "title":"Senior Product Support Manager", "comments":"", "parent":5, "key":17},
+{"name":"Kishan Rabari", "title":"Junior Product Support Manager", "comments":"", "parent":5, "key":18},
+{"name":"Ashen Ranaweera", "title":"Junior Product Support Manager", "comments":"", "parent":5, "key":19},
+{"name":"Jay Solanki", "title":"Junior Product Support Manager", "comments":"", "parent":5, "key":20},
+{"name":"Rohini Rabari", "title":"Account & Corporate Administrator", "comments":"FTC", "parent":9, "key":21},
+{"name":"Belinda Garty", "title":"Corporate Account Manager", "comments":"", "parent":10, "key":22},
+{"name":"Gareth Lees", "title":"Technical Support Manager", "comments":"", "parent":22, "key":23}
+ ]}</textarea>
   </div>
 </div>
 </body>
