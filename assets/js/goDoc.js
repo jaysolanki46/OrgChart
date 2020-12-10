@@ -11,7 +11,7 @@ function goDoc() {
   ftr.className = "footer";
   var msg = "Copyright &copy; 1998-2020 by Northwoods Software Corporation.";
   if (go && go.version) {
-    msg = "GoJS&reg; version " + go.version + ". " + msg;
+    msg = "GoJS1&reg; version " + go.version + ". " + msg;
   }
   ftr.innerHTML = msg;
   document.body.appendChild(ftr);

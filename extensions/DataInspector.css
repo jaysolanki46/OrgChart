@@ -51,3 +51,14 @@ see also: DataInspector.js, DataInspector.html
   background-color: #424242;
 }
 
+#container  {
+  width: 98%;	
+  position: absolute;	
+  z-index: 9;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-between; /* switched from default (flex-start, see below) */
+}

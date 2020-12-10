@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-  <title>Org Chart Editor</title>
+  <title>Skyzer Org Chart</title>
   <!-- Copyright 1998-2020 by Northwoods Software Corporation. -->
   <meta name="description" content="An organization chart editor -- edit details and change relationships." />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,6 +52,9 @@
             "undoManager.isEnabled": true // enable undo & redo
           });
 
+		// Diagram zoom size
+		myDiagram.scale = 0.7;
+
       // when the document is modified, add a "*" to the title and enable the "Save" button
       myDiagram.addDiagramListener("Modified", function(e) {
         var button = document.getElementById("SaveButton");
@@ -86,8 +89,7 @@
         myDiagram.commitTransaction("clear boss");
       });
 
-      var levelColors = ["#AC193D", "#2672EC", "#8C0095", "#5133AB",
-        "#008299", "#D24726", "#008A00", "#094AB2"];
+      var levelColors = ["#0066cb"];
 
       // override TreeLayout.commitNodes to also modify the background brush based on the tree depth level
       myDiagram.layout.commitNodes = function() {
@@ -182,7 +184,7 @@
           // define the node's outer shape
           $(go.Shape, "Rectangle",
             {
-              name: "SHAPE", fill: "#333333", stroke: 'white', strokeWidth: 3.5,
+              name: "SHAPE", fill: "#0066cb", stroke: 'white', strokeWidth: 3.5,
               // set the port properties:
               portId: "", fromLinkable: true, toLinkable: true, cursor: "pointer"
             }),
@@ -221,9 +223,6 @@
                   margin: new go.Margin(0, 0, 0, 0)
                 },
                 new go.Binding("text", "title").makeTwoWay()),
-			  $(go.TextBlock, textStyle(),
-                { row: 2, column: 0 },
-                new go.Binding("text", "key", function(v) { return "Image: Member-" + v + ".jpg"; })),	
               $(go.TextBlock, textStyle(),  // the comments
                 {
                   row: 3, column: 0, columnSpan: 5,
@@ -298,7 +297,7 @@
       myDiagram.linkTemplate =
         $(go.Link, go.Link.Orthogonal,
           { corner: 5, relinkableFrom: true, relinkableTo: true },
-          $(go.Shape, { strokeWidth: 1.5, stroke: "#F5F5F5" }));  // the link shape
+          $(go.Shape, { strokeWidth: 1.5, stroke: "#000000" }));  // the link shape
 
       // read in the JSON-format data from the "mySavedModel" element
       load();
@@ -345,11 +344,21 @@
 </head>
 <body onload="init()">
 <div id="sample">
-
-  <div id="myDiagramDiv" style="background-color: #34343C; border: solid 1px black; height: 570px;"></div>
+	
+	<div id="container">
+	  <div>
+		<img alt="" loading="lazy" height="49.373333" width="370.16" data-src="https://www.skyzer.co.nz/wp-content/uploads/2019/08/Skyzer-Technologies-Logo.svg" class="vc_single_image-img attachment-full lazyloaded" src="https://www.skyzer.co.nz/wp-content/uploads/2019/08/Skyzer-Technologies-Logo.svg">
+	  </div>
+	 
+	  <div>
+		<img alt="" loading="lazy" height="70.373333" width="370.16" style="margin: -11px;" data-src="https://www.skyzerpayments.co.nz/wp-content/uploads/2019/11/Skyzer-Payments-Logo.svg" class="vc_single_image-img attachment-full ls-is-cached lazyloaded" src="https://www.skyzerpayments.co.nz/wp-content/uploads/2019/11/Skyzer-Payments-Logo.svg">
+	  </div>
+	</div>
+	
+  <div id="myDiagramDiv" style="background-color: #fff; height: 57rem; width: 119rem; top: -8rem;"></div>
   <!--<p><button id="zoomToFit">Zoom to Fit</button> <button id="centerRoot">Center on root</button></p>-->
   
-  <div>
+  <div >
     <div>
       <button id="SaveButton" onclick="save()">Save</button>
       <button onclick="load()">Load</button>
